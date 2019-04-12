@@ -1,0 +1,3 @@
+# Shigoto Lisp
+
+weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
