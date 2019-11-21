@@ -1,3 +1,3 @@
 # Shigoto Lisp,
 
-is a Lisp in work.
+Shigoto Lisp is a Lisp of labor.
