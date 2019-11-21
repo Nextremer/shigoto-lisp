@@ -1,3 +1,3 @@
-# Shigoto Lisp
+# Shigoto Lisp,
 
-weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+is a Lisp in work.
