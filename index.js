@@ -10,16 +10,11 @@ var reader = require('readline').createInterface({
 reader.on('line', (line) => {
   let s = make_stream(line);
   console.log(sl_print(sl_eval(sl_read(s))));
-  console.log('> ');
+  process.stdout.write('> ');
 });
 
 reader.on('close', () => {
   console.log('bye!');
 });
 
-console.log('> ');
-
-module.exports = {
-  make_stream, read_char, peek_char,
-  sl_read, sl_eval, sl_print
-}
+process.stdout.write('> ');
