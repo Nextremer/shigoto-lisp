@@ -26,7 +26,7 @@ const sl_read_symbol = (stream) => {
   let s = [];
   while (true) {
     let ch = peek_char(stream);
-    if (ch !== null && !' '.includes(ch)) {
+    if (ch !== null && !' ()"'.includes(ch)) {
       s.push(read_char(stream));
     } else {
       return s.join('');
