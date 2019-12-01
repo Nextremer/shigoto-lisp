@@ -54,7 +54,7 @@ const sl_eval = (form) => {
     const name = form[0];
     switch (name) {
       case 'if':
-        if (sl_eval(form[1]) === 1) {
+        if (sl_eval(form[1]) !== []) {
           return sl_eval(form[2]);
         } else {
           return sl_eval(form[3]);
