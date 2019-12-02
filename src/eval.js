@@ -51,6 +51,17 @@ var global_env = {
   bindings: fn_table,
 };
 
+const sl_find = (name, env) => {
+  if (env === undefined) {
+    return undefined;
+  }
+  let val = env.bindings[name];
+  if (val === undefined) {
+    return sl_find(name, env.parent);
+  }
+  return val;
+}
+
 const sl_eval = (form, env=global_env) => {
   if (Array.isArray(form)) {
     const name = form[0];
@@ -82,16 +93,7 @@ const sl_eval = (form, env=global_env) => {
   } else if (typeof form === 'number') {
     return form;
   } else if (typeof form === 'string') {
-    let val = undefined;
-    let _env = env;
-    while (_env !== null) {
-      if (_env.bindings[form] !== undefined) {
-        val = _env.bindings[form];
-        break;
-      }
-      _env = _env.parent;
-    }
-    return val;
+    return sl_find(form, env);
   }
 };
 
