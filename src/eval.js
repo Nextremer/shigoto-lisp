@@ -46,10 +46,12 @@ const fn_table = {
 //adder() => 1;
 //...
 
-// env = [parent_env, value_map]
-var global_env = [null, {}];
+var global_env = {
+  parent: null,
+  bindings: fn_table,
+};
 
-const sl_eval = (form) => {
+const sl_eval = (form, env=global_env) => {
   if (Array.isArray(form)) {
     const name = form[0];
     switch (name) {
@@ -61,8 +63,9 @@ const sl_eval = (form) => {
         }
 
       case 'define':
+        let name = form[1];
         let val = sl_eval(form[2]);
-        env[form[1]] = val;
+        env.bindings[name] = val;
         return val;
 
       case 'lambda':
@@ -79,7 +82,16 @@ const sl_eval = (form) => {
   } else if (typeof form === 'number') {
     return form;
   } else if (typeof form === 'string') {
-    return env[form];
+    let val = undefined;
+    let _env = env;
+    while (_env !== null) {
+      if (_env.bindings[form] !== undefined) {
+        val = _env.bindings[form];
+        break;
+      }
+      _env = _env.parent;
+    }
+    return val;
   }
 };
 
