@@ -80,15 +80,14 @@ const sl_eval = (form, env=global_env) => {
         return val;
 
       case 'lambda':
-        let env = {};
-        console.log(form[1]);
-        form[1].forEach(name => { env[name] = null });
-        console.log(env);
-        return 'nil';
+        return { args: form[1], code: form[2] };
 
       default:
-        let args = form.slice(1).map(sl_eval);
-        return fn_table[name](args);
+        let args = form.slice(1);
+        let fn = sl_find(form[0], env);
+        let new_env = { parent: env, bindings: {} };
+        fn.args.forEach((arg, i) => { new_env.bindings[arg] = sl_eval(args[i], env) });
+        return sl_eval(fn.code, new_env);
     }
   } else if (typeof form === 'number') {
     return form;
