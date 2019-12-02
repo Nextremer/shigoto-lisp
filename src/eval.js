@@ -46,7 +46,7 @@ var global_env = {
 };
 
 const sl_find = (name, env) => {
-  if (env === undefined) {
+  if (env === null) {
     return undefined;
   }
   let val = env.bindings[name];
