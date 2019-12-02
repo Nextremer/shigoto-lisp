@@ -25,13 +25,7 @@ const fn_table = {
   '-': (args) => (args[0] - args[1]),
   '*': (args) => (args[0] * args[1]),
   '/': (args) => (args[0] / args[1]),
-  '=': (args) => {
-    if (args[0] === args[1]) {
-      return 1;
-    } else {
-      return 0;
-    }
-  },
+  '=': (args) => (args[0] === args[1]  ? 't' : []),
   '.': (args) => console.log(args[0]),
   'if2': (args) => args[0] === 1 ? args[1] : args[2],
 };
