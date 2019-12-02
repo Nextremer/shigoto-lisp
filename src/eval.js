@@ -62,9 +62,9 @@ const sl_eval = (form, env=global_env) => {
     switch (name) {
       case 'if':
         if (sl_eval(form[1]) !== []) {
-          return sl_eval(form[2]);
+          return sl_eval(form[2], env);
         } else {
-          return sl_eval(form[3]);
+          return sl_eval(form[3], env);
         }
 
       case 'define':
