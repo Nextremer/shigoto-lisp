@@ -79,9 +79,13 @@ const sl_eval = (form, env=global_env) => {
       default:
         let args = form.slice(1);
         let fn = sl_find(form[0], env);
-        let new_env = { parent: env, bindings: {} };
-        fn.args.forEach((arg, i) => { new_env.bindings[arg] = sl_eval(args[i], env) });
-        return sl_eval(fn.code, new_env);
+        if (typeof fn == 'function') {
+          return fn(args.map(arg => sl_eval(arg, env)));
+        } else {
+           let new_env = { parent: env, bindings: {} };
+           fn.args.forEach((arg, i) => { new_env.bindings[arg] = sl_eval(args[i], env) });
+           return sl_eval(fn.code, new_env);
+        }
     }
   } else if (typeof form === 'number') {
     return form;
