@@ -61,7 +61,7 @@ const sl_eval = (form, env=global_env) => {
     const name = form[0];
     switch (name) {
       case 'if':
-        if (sl_eval(form[1]) !== []) {
+         if (JSON.stringify(sl_eval(form[1], env)) !== JSON.stringify([])) {
           return sl_eval(form[2], env);
         } else {
           return sl_eval(form[3], env);
